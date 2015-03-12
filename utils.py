@@ -17,8 +17,9 @@ def performance(inits=False):
     :param inits: init starting time on first call
     """
     if inits:
-        # Could not come with a good solution to store START variable from call to call
-        # without class creation, so using global here and added disable to pylint.
+        # Could not come with a good solution to store START variable from
+        # call to call without class creation, so using global here and added
+        # disable to pylint.
         global START
         START = in_millis(time.time())
     else:
