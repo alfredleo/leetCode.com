@@ -1,14 +1,24 @@
+# encoding: utf-8
+# module utils
+# pylint: disable=global-statement
+"""
+This is a support module for algorithms performance check
+"""
 import time
 
-__author__ = 'Alfred'
+__author__ = 'alfredleo@gmail.com (Alfred)'
+
+START = 0
 
 
 def performance(inits=False):
     """
     Performance measerement tool
-    :param inits: init START time on first call
+    :param inits: init starting time on first call
     """
-    if inits or 'START' not in globals():
+    if inits:
+        # Could not come with a good solution to store START variable from call to call
+        # without class creation, so using global here and added disable to pylint.
         global START
         START = in_millis(time.time())
     else:
@@ -17,8 +27,13 @@ def performance(inits=False):
         START = end
 
 
-def in_millis(t):
-    return int(round(t * 1000))
+def in_millis(val):
+    """
+    Converts float time in seconds to milliseconds
+    :type t: time in seconds of type float
+    :return: current time in milliseconds
+    """
+    return int(round(val * 1000))
 
 
 def wrapper(func, *args):
