@@ -9,10 +9,11 @@ as the Hamming weight). For example, the 32-bit integer '11' has binary represen
 
 class Solution:
     """
-    >>> print Solution().hammingWeight(342423432423423423423423423L)
+    >>> s = Solution()
+    >>> print s.hammingWeight(342423432423423423423423423L)
     58
 
-    >>> print Solution().hammingWeight(11)
+    >>> print s.hammingWeight(11)
     3
 
     """
