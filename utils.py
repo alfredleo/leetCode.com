@@ -30,11 +30,11 @@ def wrapper(func, *args):
     func(*args)
 
 
-def testSpeed(functionName, bignum=(2 ^ 999), size=10000000):
+def test_speed(function_name, bignum=(2 ^ 999), size=10000000):
     """
     Test algorithms speed
     """
     performance(True)
     for i in range(1, size):
-        wrapper(functionName, bignum)
+        wrapper(function_name, bignum)
     performance()
