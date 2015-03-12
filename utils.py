@@ -6,15 +6,15 @@ __author__ = 'Alfred'
 def performance(inits=False):
     """
     Performance measerement tool
-    :param inits: init start time on first call
+    :param inits: init START time on first call
     """
-    if inits or 'start' not in globals():
-        global start
-        start = in_millis(time.time())
+    if inits or 'START' not in globals():
+        global START
+        START = in_millis(time.time())
     else:
         end = in_millis(time.time())
-        print end - start
-        start = end
+        print end - START
+        START = end
 
 
 def in_millis(t):
@@ -35,6 +35,8 @@ def test_speed(function_name, bignum=(2 ^ 999), size=10000000):
     Test algorithms speed
     """
     performance(True)
-    for i in range(1, size):
+    # see my answer on unused variable complain
+    # http://stackoverflow.com/questions/5477134/how-can-i-get-around-declaring-an-unused-variable-in-a-for-loop/
+    for dummy in range(1, size):
         wrapper(function_name, bignum)
     performance()
