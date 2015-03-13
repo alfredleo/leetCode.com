@@ -1,6 +1,5 @@
 # encoding: utf-8
 # module utils
-# pylint: disable=global-statement
 """
 This is a support module for algorithms performance check
 """
@@ -17,10 +16,11 @@ def performance(inits=False):
     :param inits: init starting time on first call
     """
     if inits:
+        # TODO(Alfred): Implement performance testing without global variable.
         # Could not come with a good solution to store START variable from
         # call to call without class creation, so using global here and added
         # disable to pylint.
-        global START
+        global START  # pylint: disable=global-statement
         START = in_millis(time.time())
     else:
         end = in_millis(time.time())
