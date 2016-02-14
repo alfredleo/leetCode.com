@@ -49,6 +49,9 @@ def wrapper(func, *args):
 def test_speed(function_name, bignum=(2 ^ 999), size=10000000):
     """
     Test algorithms speed
+    :param size:
+    :param function_name:
+    :param bignum:
     """
     performance(True)
     # see my answer on unused variable complain
