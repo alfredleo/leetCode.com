@@ -41,4 +41,4 @@ INSERT INTO person (email) VALUES
 ;
 
 -- sql solution
-SELECT (email) AS e FROM person GROUP BY email HAVING count(e) > 1;
+SELECT Email FROM erson GROUP BY Email HAVING count(Email) > 1;
