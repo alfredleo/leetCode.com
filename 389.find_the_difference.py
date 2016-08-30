@@ -35,7 +35,7 @@ class Solution(object):
 
 
 sol = Solution()
-print sol.findTheDifference('abcd', 'dcab')
+print sol.findTheDifference('abcd', 'kdcab')
 
 ss = "ymbgaraibkfmvocpizdydugvalagaivdbfsfbepeyccqfepzvtpyxtbadkhmwmoswrcxnargtlswqemafandgkmydtimuzvjwxvlfwlhvkr" \
      "gcsithaqlcvrihrwqkpjdhgfgreqoxzfvhjzojhghfwbvpfzectwwhexthbsndovxejsntmjihchaotbgcysfdaojkjldprwyrnischrgmt" \
