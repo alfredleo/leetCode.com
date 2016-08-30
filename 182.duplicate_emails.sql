@@ -1,6 +1,7 @@
 /* 182. Duplicate Emails
 
 URL: https://leetcode.com/problems/duplicate-emails/
+Testing on 
 
 Write a SQL query to find all duplicate emails in a table named Person.
 
@@ -41,4 +42,4 @@ INSERT INTO person (email) VALUES
 ;
 
 -- sql solution
-SELECT Email FROM erson GROUP BY Email HAVING count(Email) > 1;
+SELECT Email FROM Person GROUP BY Email HAVING count(Email) > 1;
