@@ -16,3 +16,13 @@ class Solution(object):
         :type t: str
         :rtype: str
         """
+
+        # the straightforward solution is to iterate over every character in string s and remove it from string t
+        # that would give n*n, which is not good.
+        for c in s:
+            t = t.replace(c, '')
+        return t
+
+
+sol = Solution()
+print sol.findTheDifference('abcd', 'edcab')
