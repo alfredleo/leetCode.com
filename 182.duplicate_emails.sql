@@ -19,3 +19,24 @@ For example, your query should return the following for the above table:
 Note: All emails are in lowercase.
 
 */
+
+-- shema for testing
+
+CREATE TABLE person (
+  id integer auto_increment NOT NULL,
+  email text NOT NULL,
+  primary key (id)
+);
+
+INSERT INTO person (email) VALUES
+  ('alfred@gmail.com'),
+  ('alfred@gmail.com'),
+  ('alfred@gmail.com'),
+  ('mama@gmail.com'),
+  ('mama@gmail.com'),
+  ('mamat@gmail.com'),
+  ('lala@mail.ru')
+;
+
+-- sql solution
+SELECT (email) AS e FROM person GROUP BY email HAVING count(e) > 1;
