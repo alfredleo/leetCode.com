@@ -9,33 +9,31 @@
 # t = "abcde"
 # Output: e
 # Explanation: 'e' is the letter that was added.
+import timeit
 
 
-class Solution(object):
-    def findTheDifference(self, s, t):
-        """
-        :type s: str
-        :type t: str
-        :rtype: str
-        """
-        return chr(sum(bytearray(t, 'utf8')) - sum(bytearray(s, 'utf8')))
-
-    def findTheDifference1(self, s, t):
-        """
-        :type s: str
-        :type t: str
-        :rtype: str
-        """
-
-        # the straightforward solution is to iterate over every character in string s and remove it from string t
-        # that would give n*n, which is not good.
-        for c in s:
-            t = t.replace(c, '', 1)
-        return t
+def findTheDifference(s, t):
+    return chr(sum(bytearray(t, 'utf8')) - sum(bytearray(s, 'utf8')))
 
 
-sol = Solution()
-print sol.findTheDifference('abcd', 'kdcab')
+def findTheDifference1(s, t):
+    # the straightforward solution is to iterate over every character in string s and remove it from string t
+    # that would give n*n, which is not good.
+    for c in s:
+        t = t.replace(c, '', 1)
+    return t
+
+
+def findTheDifference2(s, t):
+    # This solution is voted as the best one on LeetCoode, but testings shows that the first one
+    # findTheDifference is almost 6 times faster on 10000 repetitions.
+    summ = 0
+    for char in s:
+        summ ^= ord(char)
+    for char in t:
+        summ ^= ord(char)
+    return chr(summ)
+
 
 ss = "ymbgaraibkfmvocpizdydugvalagaivdbfsfbepeyccqfepzvtpyxtbadkhmwmoswrcxnargtlswqemafandgkmydtimuzvjwxvlfwlhvkr" \
      "gcsithaqlcvrihrwqkpjdhgfgreqoxzfvhjzojhghfwbvpfzectwwhexthbsndovxejsntmjihchaotbgcysfdaojkjldprwyrnischrgmt" \
@@ -57,4 +55,19 @@ tt = "qhxepbshlrhoecdaodgpousbzfcqjxulatciapuftffahhlmxbufgjuxstfjvljybfxnenlacm
      "zuwfmrdggifokwmkgzuxnhncmnsstffqpqbplypapctctfhqpihavligbrutxmmygiyaklqtakdidvnvrjfteazeqmbgklrgrorudayokxp" \
      "tswwkcircwuhcavhdparjfkjypkyxhbgwxbkvpvrtzjaetahmxevmkhdfyidhrdeejapfbafwmdqjqszwnwzgclitdhlnkaiyldwkwwzvhy" \
      "orgbysyjbxsspnjdewjxbhpsvj"
-print sol.findTheDifference(ss, tt)
+
+
+def main():
+    # simple check of functions
+    print findTheDifference('abcd', 'kdcab')
+    print findTheDifference(ss, tt)
+    print findTheDifference1(ss, tt)
+    print findTheDifference2(ss, tt)
+    # time based check
+    print timeit.timeit("findTheDifference(ss, tt)", setup="from __main__ import *", number=100000)
+    print timeit.timeit("findTheDifference1(ss, tt)", setup="from __main__ import *", number=100000)
+    print timeit.timeit("findTheDifference2(ss, tt)", setup="from __main__ import *", number=100000)
+
+
+if __name__ == '__main__':
+    main()
