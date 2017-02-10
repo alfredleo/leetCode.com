@@ -28,9 +28,9 @@ Contributors: kevin.xinzhao@gmail.com
 class Solution(object):
     """
     >>> s = Solution()
-    >>> s.totalHammingDistance([4,14,2])
+    >>> s.underTest([4,14,2])
     6
-    >>> s.totalHammingDistance(s.BIG_TEST)
+    >>> s.underTest(s.BIG_TEST)
     5857302
     """
 
@@ -121,6 +121,7 @@ class Solution(object):
 
     def totalHammingDistance(self, nums):
         """
+        Not accepted algorithm
         :type nums: List[int]
         :rtype: int
         """
@@ -131,14 +132,57 @@ class Solution(object):
                 summ += bin(nums[i] ^ nums[j]).count('1')
         return summ
 
+    def totalHammingDistance1(self, nums):
+        """
+        To speed up things, we check each bit of every number on the same position. Then count number of ones (n) and
+        multiply that by the number of the rest zeroes (size - n). So for each position we get (n * (size - n))
+        variations. The sum of variation in each position will be the answer.
+        :param nums: List[int]
+        :return: int
+        """
+
+        size = len(nums)
+        aggregate = [0] * 31
+        for num in nums:
+            for i in xrange(0, 31):
+                if num & (1 << i) > 0:
+                    aggregate[i] += 1
+        return sum((n * (size - n)) for n in aggregate)
+
+    def getBit(self, int_type, offset):
+        """
+        getBit() returns 1 if the bit at 'offset' is one else 0.
+        >>> s = Solution()
+        >>> s.getBit(5, 0)
+        1
+        >>> s.getBit(5, 1)
+        0
+        >>> s.getBit(55, 10)
+        0
+
+        :param int_type:
+        :param offset:
+        :return:
+        """
+        mask = 1 << offset
+        ret = int_type & mask
+        if ret > 0:
+            ret = 1
+        return ret
+
+    def underTest(self, nums):
+        # The function to be tested
+        return self.totalHammingDistance1(nums)
+
 
 if __name__ == '__main__':
     import doctest
 
-    if False:
-        doctest.testmod(verbose=True)
-    else:
-        s = Solution()
-        START = utils.in_millis(time.time())
-        print s.totalHammingDistance(s.BIG_TEST)
-        print utils.in_millis(time.time()) - START, 'milliseconds'
+    print "TESTING RETURN VALUES --------------------"
+    doctest.testmod(verbose=True)
+
+    print "TESTING PERFORMANCE ----------------------"
+    s = Solution()
+    START = utils.in_millis(time.time())
+    s.underTest(s.BIG_TEST)
+    print utils.in_millis(time.time()) - START, 'milliseconds'
