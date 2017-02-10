@@ -40,9 +40,9 @@ __author__ = 'alfredleo@gmail.com (Alfred)'
 class Solution(object):
     """
     >>> sol = Solution()
-    >>> print sol.licenseKeyFormatting5("2-4A0r7-4k",4)
+    >>> print sol.licenseKeyFormatting7("2-4A0r7-4k",4)
     24A0-R74K
-    >>> print sol.licenseKeyFormatting5("2-4A0r7-4k",3)
+    >>> print sol.licenseKeyFormatting7("2-4A0r7-4k",3)
     24-A0R-74K
     """
 
@@ -147,6 +147,30 @@ class Solution(object):
         if start != 0:
             remaining = S[0:start].upper() + '-'
         return (remaining + file_str.getvalue())[:-1]
+
+    def licenseKeyFormatting6(self, S, K):
+        """
+        The most pythonic and fast implementation
+        author: realisking
+        :type S: str
+        :type K: int
+        :rtype: str
+        """
+        S = "".join(S.upper().split("-"))
+        end = len(S) % K
+        ans = "-".join([S[:end]] + [S[i:i + K] for i in range(end, len(S), K)])
+        return ans.lstrip("-")
+
+    def licenseKeyFormatting7(self, S, K):
+        """
+        Beats 89% submissions on 10.02.2017 (50 ms)
+        author: zqfan
+        :type S: str
+        :type K: int
+        :rtype: str
+        """
+        s = S.replace('-', '').upper()[::-1]
+        return '-'.join([s[i:i + K] for i in xrange(0, len(s), K)])[::-1]
 
 
 if __name__ == '__main__':
