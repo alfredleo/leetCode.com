@@ -39,9 +39,9 @@ __author__ = 'alfredleo@gmail.com (Alfred)'
 class Solution(object):
     """
     >>> sol = Solution()
-    >>> print sol.licenseKeyFormatting("2-4A0r7-4k",4)
+    >>> print sol.licenseKeyFormatting4("2-4A0r7-4k",4)
     24A0-R74K
-    >>> print sol.licenseKeyFormatting("2-4A0r7-4k",3)
+    >>> print sol.licenseKeyFormatting4("2-4A0r7-4k",3)
     24-A0R-74K
     """
 
@@ -56,12 +56,78 @@ class Solution(object):
         step = 0
         S = S.replace('-', '').upper()
         for c in reversed(S):
-                if step % K == 0 and step != 0:
-                    formatted = '-' + formatted
-                formatted = c + formatted
-                step += 1
+            if step % K == 0 and step != 0:
+                formatted = '-' + formatted
+            formatted = c + formatted
+            step += 1
         return formatted
 
+    def licenseKeyFormatting1(self, S, K):
+        """
+        Beats 3.12% submissions on 10.02.2017 (392 ms)
+        :type S: str
+        :type K: int
+        :rtype: str
+        """
+        formatted = []
+        step = 0
+        S = S.replace('-', '').upper()
+        for c in reversed(S):
+            if c != '-':
+                if step % K == 0 and step != 0:
+                    formatted.insert(0, '-')
+                formatted.insert(0, c.upper())
+                step += 1
+        return ''.join(formatted)
+
+    def licenseKeyFormatting2(self, S, K):
+        """
+        Beats 29.91% submissions on 10.02.2017 (172 ms)
+        :type S: str
+        :type K: int
+        :rtype: str
+        """
+        formatted = ''
+        step = 0
+        S = S.replace('-', '').upper()
+        for c in reversed(S):
+            if step % K == 0:
+                formatted = '-' + formatted
+            formatted = c + formatted
+            step += 1
+        return formatted[:-1]
+
+    def licenseKeyFormatting3(self, S, K):
+        """
+        Beats 76.17% submissions on 10.02.2017 (49 ms)
+        :type S: str
+        :type K: int
+        :rtype: str
+        """
+        formatted = []
+        S = S.replace('-', '').upper()
+        for i in xrange(len(S), 0, -K):
+            start = i - K
+            if start < 0:
+                start = 0
+            formatted.insert(0, '-' + S[start:i])
+        return ''.join(formatted)[1:]
+
+    def licenseKeyFormatting4(self, S, K):
+        """
+        Beats 90.58% submissions on 10.02.2017 (42 ms)
+        :type S: str
+        :type K: int
+        :rtype: str
+        """
+        formatted = []
+        S = S.replace('-', '')
+        for i in xrange(len(S), 0, -K):
+            start = i - K
+            if start < 0:
+                start = 0
+            formatted.insert(0, '-' + S[start:i].upper())
+        return ''.join(formatted)[1:]
 
 if __name__ == '__main__':
     import doctest
