@@ -25,6 +25,12 @@ Note:
 The length of string S will not exceed 12,000, and K is a positive integer.
 String S consists only of alphanumerical characters (a-z and/or A-Z and/or 0-9) and dashes(-).
 String S is non-empty.
+
+Total Accepted: 7087
+Total Submissions: 17021
+Difficulty: Medium
+Contributors: aizj_Forever
+
 """
 
 __author__ = 'alfredleo@gmail.com (Alfred)'
@@ -45,10 +51,18 @@ class Solution(object):
         :type K: int
         :rtype: str
         """
-        return True
+        formatted = []
+        step = 0
+        for c in reversed(S):
+            if c != '-':
+                if step % K == 0 and step != 0:
+                    formatted.insert(0, '-')
+                formatted.insert(0, c.upper())
+                step += 1
+        return ''.join(formatted)
 
 
 if __name__ == '__main__':
     import doctest
 
-    doctest.testmod()
+    doctest.testmod(verbose=True)
