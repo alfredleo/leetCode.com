@@ -24,20 +24,32 @@ Contributors: Samuri
 class Solution(object):
     """
     >>> s = Solution()
-    >>> s.hammingDistance(1,4)
+    >>> s.hammingDistance1(1,4)
     2
+    >>> s.hammingDistance1(0,2**(2**28) - 1)
+    268435456
     """
 
     def hammingDistance(self, x, y):
+        """
+        Beats 95.74 - 47.86 % submissions on 10.02.2017 (36-45 ms)
+        :type x: int
+        :type y: int
+        :rtype: int
+        """
+        return bin(y ^ x).count('1')
+
+    def hammingDistance1(self, x, y):
         """
         :type x: int
         :type y: int
         :rtype: int
         """
-        pass
+        import gmpy2
+        return gmpy2.popcount(x ^ y)
 
 
 if __name__ == '__main__':
     import doctest
 
-    doctest.testmod()
+    doctest.testmod(verbose=True)
