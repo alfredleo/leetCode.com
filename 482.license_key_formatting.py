@@ -1,4 +1,5 @@
 # encoding: utf-8
+from cStringIO import StringIO
 
 """
 Now you are given a string S, which represents a software license key which we would like to format. The string S is
@@ -39,9 +40,9 @@ __author__ = 'alfredleo@gmail.com (Alfred)'
 class Solution(object):
     """
     >>> sol = Solution()
-    >>> print sol.licenseKeyFormatting4("2-4A0r7-4k",4)
+    >>> print sol.licenseKeyFormatting5("2-4A0r7-4k",4)
     24A0-R74K
-    >>> print sol.licenseKeyFormatting4("2-4A0r7-4k",3)
+    >>> print sol.licenseKeyFormatting5("2-4A0r7-4k",3)
     24-A0R-74K
     """
 
@@ -128,6 +129,25 @@ class Solution(object):
                 start = 0
             formatted.insert(0, '-' + S[start:i].upper())
         return ''.join(formatted)[1:]
+
+    def licenseKeyFormatting5(self, S, K):
+        """
+        Beats 97.59% - 66.51% submissions on 10.02.2017 (39-58 ms)
+        It seems like the % varies depending on the server load of leetcode.
+        :type S: str
+        :type K: int
+        :rtype: str
+        """
+        file_str = StringIO()
+        S = S.replace('-', '')
+        start = len(S) % K
+        for i in xrange(start, len(S), K):
+            file_str.write(S[i:i + K].upper() + '-')
+        remaining = ''
+        if start != 0:
+            remaining = S[0:start].upper() + '-'
+        return (remaining + file_str.getvalue())[:-1]
+
 
 if __name__ == '__main__':
     import doctest
