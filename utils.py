@@ -24,7 +24,7 @@ def performance(inits=False):
         START = in_millis(time.time())
     else:
         end = in_millis(time.time())
-        print end - START
+        print '-->', end - START, 'milliseconds'
         START = end
 
 
