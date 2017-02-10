@@ -47,19 +47,20 @@ class Solution(object):
 
     def licenseKeyFormatting(self, S, K):
         """
+        Beats 17.29% submissions on 10.02.2017 (216 ms)
         :type S: str
         :type K: int
         :rtype: str
         """
-        formatted = []
+        formatted = ''
         step = 0
+        S = S.replace('-', '').upper()
         for c in reversed(S):
-            if c != '-':
                 if step % K == 0 and step != 0:
-                    formatted.insert(0, '-')
-                formatted.insert(0, c.upper())
+                    formatted = '-' + formatted
+                formatted = c + formatted
                 step += 1
-        return ''.join(formatted)
+        return formatted
 
 
 if __name__ == '__main__':
