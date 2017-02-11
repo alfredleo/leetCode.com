@@ -1288,6 +1288,16 @@ class Solution(object):
         """
         return sum(b.count('0') * b.count('1') for b in zip(*map('{:032b}'.format, nums)))
 
+    def totalHammingDistance4(self, nums):
+        """
+        author: atmali
+        :param nums: List[int]
+        :return: int
+        """
+
+        f = lambda x: x.count(1) * x.count(0)
+        return sum([f([num >> i & 1 for num in nums]) for i in xrange(32)])
+
     def underTest(self, nums):
         # The function to be tested. Used in doctests and performance tests
         return self.totalHammingDistance3(nums)
