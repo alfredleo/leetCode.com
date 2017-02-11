@@ -1281,7 +1281,7 @@ class Solution(object):
     def totalHammingDistance3(self, nums):
         """
         Best algorithm so far.
-        Beats 83.96% submissions on 11.02.2017 (326 ms)
+        Beats 95.40% submissions on 11.02.2017 (292 ms)
         author: StefanPochmann
         :param nums: List[int]
         :return: int
