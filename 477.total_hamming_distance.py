@@ -1247,7 +1247,7 @@ class Solution(object):
 
     def totalHammingDistance1(self, nums):
         """
-        Beats 51.18% submissions on 11.02.2017 (485 ms)
+        Beats 51.30% submissions on 11.02.2017 (482 ms)
         To speed up things, we check each bit of every number on the same position. Then count number of ones (n) and
         multiply that by the number of the rest zeroes (size - n). So for each position we get (n * (size - n))
         variations. The sum of variation in each position will be the answer.
@@ -1257,7 +1257,7 @@ class Solution(object):
 
         aggregate = [0] * 31
         for num in nums:
-            for i in xrange(0, 31):
+            for i in xrange(0, num.bit_length()):
                 if num & (1 << i) > 0:
                     aggregate[i] += 1
         return sum((n * (len(nums) - n)) for n in aggregate)
