@@ -1278,9 +1278,19 @@ class Solution(object):
                 num >>= 1
         return sum((n * (size - n)) for n in aggregate)
 
+    def totalHammingDistance3(self, nums):
+        """
+        Best algorithm so far.
+        Beats 83.96% submissions on 11.02.2017 (326 ms)
+        author: StefanPochmann
+        :param nums: List[int]
+        :return: int
+        """
+        return sum(b.count('0') * b.count('1') for b in zip(*map('{:032b}'.format, nums)))
+
     def underTest(self, nums):
         # The function to be tested. Used in doctests and performance tests
-        return self.totalHammingDistance1(nums)
+        return self.totalHammingDistance3(nums)
 
 
 if __name__ == '__main__':
@@ -1295,4 +1305,6 @@ if __name__ == '__main__':
     print s.totalHammingDistance1(s.BIG_TEST2)
     performance()
     print s.totalHammingDistance2(s.BIG_TEST2)
+    performance()
+    print s.totalHammingDistance3(s.BIG_TEST2)
     performance()
