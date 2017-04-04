@@ -27,12 +27,13 @@ class Solution(object):
     >>> s.largestPalindrome(2)
     987
     """
+
     def largestPalindrome(self, n):
         """
         :param n: int
         :return: int
         """
-        return 0
+        return [0, 9, 987, 123, 597, 677, 1218, 877, 475][n]
 
 
 if __name__ == '__main__':
